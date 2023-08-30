@@ -4,7 +4,6 @@ import ffas.portfolio.app.business.user.dto.UserDto;
 import ffas.portfolio.app.business.user.form.CreateUserForm;
 import ffas.portfolio.app.business.user.form.UpdateUserForm;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface UserFacade {

@@ -1,21 +1,18 @@
-package ffas.portfolio.app.persistence.user.adapter;
+package ffas.portfolio.app.persistence.user;
 
 import ffas.portfolio.app.business.common.exceptions.NotFoundException;
 import ffas.portfolio.app.business.user.dto.UserDto;
 import ffas.portfolio.app.business.user.form.CreateUserForm;
 import ffas.portfolio.app.business.user.form.UpdateUserForm;
 import ffas.portfolio.app.business.user.port.UserPort;
-import ffas.portfolio.app.persistence.user.entity.User;
-import ffas.portfolio.app.persistence.user.entity.UserMapper;
-import static ffas.portfolio.app.persistence.user.entity.UserMapper.toUser;
-import static ffas.portfolio.app.persistence.user.entity.UserMapper.toDto;
-import ffas.portfolio.app.persistence.user.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+import static ffas.portfolio.app.persistence.user.UserMapper.toDto;
+
 @Component
-public class UserAdapter implements UserPort {
+class UserAdapter implements UserPort {
 
     private final UserRepository userRepository;
 
@@ -25,7 +22,7 @@ public class UserAdapter implements UserPort {
 
     @Override
     public UserDto save(final CreateUserForm createUserForm) {
-        final User createdUser = userRepository.save(toUser(createUserForm));
+        final User createdUser = userRepository.save(UserMapper.toUser(createUserForm));
         return toDto(createdUser);
     }
 
@@ -40,7 +37,7 @@ public class UserAdapter implements UserPort {
 
     private void updateValues(final User user, final UpdateUserForm updateUserForm) {
         user.setAge(updateUserForm.getAge());
-        user.setSex(updateUserForm.getSex());
+        user.setSex(User.Sex.valueOf(updateUserForm.getSex()));
         user.setCitizenNumber(updateUserForm.getCitizenNumber());
     }
 

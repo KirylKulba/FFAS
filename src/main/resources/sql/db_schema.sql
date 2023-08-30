@@ -25,14 +25,13 @@ CREATE TABLE financial_data_types (
     type_name VARCHAR(50) CHECK (type_name IN ('Income', 'Expense'))
 );
 
--- Financial Data Table (Normalized further for income and expenses)
 CREATE TABLE financial_data (
     id BIGINT PRIMARY KEY,
     uuid UUID DEFAULT uuid_generate_v4(),
     user_id INT,
     type_id INT,
     amount DECIMAL(20,2) DEFAULT 0,
-    date_month DATE NOT NULL,
+    date DATE NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP,

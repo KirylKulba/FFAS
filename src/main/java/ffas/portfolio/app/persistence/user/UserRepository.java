@@ -1,6 +1,5 @@
-package ffas.portfolio.app.persistence.user.repository;
+package ffas.portfolio.app.persistence.user;
 
-import ffas.portfolio.app.persistence.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

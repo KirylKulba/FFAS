@@ -24,19 +24,18 @@ public class UserFacadeImpl implements UserFacade {
         return userPort.save(userForm);
     }
 
-
     @Override
-    public UserDto findByUuid(UUID uuid) {
-        return null;
+    public UserDto findByUuid(final UUID uuid) {
+        return userPort.findByUuid(uuid);
     }
 
     @Override
-    public UserDto update(UpdateUserForm userForm) {
+    public UserDto update(final UpdateUserForm userForm) {
         return userPort.update(userForm);
     }
 
     @Override
-    public void delete(UUID id) {
-
+    public void delete(final UUID uuid) {
+        userPort.deleteUser(uuid);
     }
 }
