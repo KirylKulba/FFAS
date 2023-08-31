@@ -5,7 +5,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Users Table
 CREATE TABLE users (
-    id BIGINT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     uuid UUID DEFAULT uuid_generate_v4(),
     citizen_number VARCHAR(255) NOT NULL UNIQUE,
     sex VARCHAR(50) CHECK (sex IN ('Male', 'Female', 'Other')),
@@ -16,17 +16,17 @@ CREATE TABLE users (
 
 -- Investment Types Table
 CREATE TABLE investment_types (
-    id BIGINT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     type_name VARCHAR(100) UNIQUE NOT NULL
 );
 
 CREATE TABLE financial_data_types (
-    id BIGINT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     type_name VARCHAR(50) CHECK (type_name IN ('Income', 'Expense'))
 );
 
 CREATE TABLE financial_data (
-    id BIGINT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     uuid UUID DEFAULT uuid_generate_v4(),
     user_id INT,
     type_id INT,
@@ -35,7 +35,7 @@ CREATE TABLE financial_data (
     description TEXT,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP,
-    FOREIGN KEY (type_id) REFERENCES investment_types(id)
+    FOREIGN KEY (type_id) REFERENCES financial_data_types(id)
         ON DELETE SET NULL
         ON UPDATE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -45,7 +45,7 @@ CREATE TABLE financial_data (
 
 -- Investments Table
 CREATE TABLE investments (
-    id BIGINT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     uuid UUID DEFAULT uuid_generate_v4(),
     user_id INT,
     type_id INT,
@@ -65,7 +65,7 @@ CREATE TABLE investments (
 
 -- Loans Table
 CREATE TABLE loans (
-    id BIGINT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     uuid UUID DEFAULT uuid_generate_v4(),
     user_id INT,
     principal_amount DECIMAL(20,2),

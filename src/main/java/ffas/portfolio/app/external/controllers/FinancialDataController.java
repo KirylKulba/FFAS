@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static java.util.Objects.nonNull;
 
 @RestController
 @CrossOrigin(maxAge = 3600)
-@RequestMapping("/financial")
+@RequestMapping("/finance")
 public class FinancialDataController {
     private final FinanceFacade financialDataFacade;
 
@@ -25,9 +27,11 @@ public class FinancialDataController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> saveFinancialData(@RequestBody final CreateFinanceDataForm form) {
-        return nonNull(financialDataFacade.save(form)) ? new ResponseEntity<>(HttpStatus.CREATED)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> saveFinancialData(@RequestBody final List<CreateFinanceDataForm> forms) {
+        for(CreateFinanceDataForm form:forms){
+            financialDataFacade.save(form);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)

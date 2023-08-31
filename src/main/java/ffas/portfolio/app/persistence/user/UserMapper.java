@@ -2,6 +2,7 @@ package ffas.portfolio.app.persistence.user;
 
 import ffas.portfolio.app.business.user.dto.UserDto;
 import ffas.portfolio.app.business.user.form.CreateUserForm;
+import ffas.portfolio.app.persistence.finance.FinanceMapper;
 
 class UserMapper {
 
@@ -13,6 +14,7 @@ class UserMapper {
         dto.setSex(user.getSex().name());
         dto.setCreatedAt(user.getCreatedAt());
         dto.setUpdatedAt(user.getUpdatedAt());
+        dto.setFinancialData(FinanceMapper.toDto(user.getFinancialData()));
         return dto;
     }
 

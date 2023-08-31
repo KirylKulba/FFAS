@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,13 +28,13 @@ import java.util.UUID;
 public abstract class AbstractEntity {
 
     @Id
-    @Column(name="id", unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name="users_seq", sequenceName="users_seq", allocationSize=1)
     protected Long id;
 
     @EqualsAndHashCode.Include
     @Column(name = "uuid", unique = true, nullable = false)
-    protected UUID uuid;
+    protected UUID uuid = UUID.randomUUID();
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();

@@ -18,7 +18,9 @@ import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -27,7 +29,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldNameConstants
-@Table(name = "\"user\"")
+@Table(name = "\"users\"")
 public class User extends AbstractEntity {
 
     @Column(name = "sex", length = 50)
@@ -44,9 +46,9 @@ public class User extends AbstractEntity {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
-    private List<FinancialData> financialData = new ArrayList<>();
+    private Set<FinancialData> financialData = new HashSet<>();
 
     public enum Sex {
         Male, Female, Other
