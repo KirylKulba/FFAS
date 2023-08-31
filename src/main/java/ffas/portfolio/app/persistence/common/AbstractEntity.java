@@ -29,7 +29,6 @@ public abstract class AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name="users_seq", sequenceName="users_seq", allocationSize=1)
     protected Long id;
 
     @EqualsAndHashCode.Include
