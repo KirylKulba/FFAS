@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static java.util.Objects.nonNull;
 
 @RestController
@@ -28,6 +30,12 @@ public class FinancialDataController {
     public ResponseEntity<?> saveFinancialData(@RequestBody final CreateFinanceDataForm form) {
         return nonNull(financialDataFacade.save(form)) ? new ResponseEntity<>(HttpStatus.CREATED)
                 : new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/batchInsert", method = RequestMethod.POST)
+    public ResponseEntity<?> saveFinancialDataBatch(@RequestBody final List<CreateFinanceDataForm> forms) {
+        financialDataFacade.saveAll(forms);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)

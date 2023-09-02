@@ -7,6 +7,8 @@ import ffas.portfolio.app.business.finance.port.FinancePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("financeFacade")
 public class FinanceFacadeImpl implements FinanceFacade {
 
@@ -20,6 +22,11 @@ public class FinanceFacadeImpl implements FinanceFacade {
     @Override
     public FinancialDataDto save(final CreateFinanceDataForm financeForm) {
         return financePort.save(financeForm);
+    }
+
+    @Override
+    public void saveAll(final List<CreateFinanceDataForm> forms) {
+        financePort.saveAll(forms);
     }
 
     @Override
