@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldNameConstants
-@Table(name = "\"loan\"")
+@Table(name = "\"loans\"")
 public class Loan extends AbstractEntity {
     @Column(name = "principal_amount")
     private BigDecimal principalAmount;

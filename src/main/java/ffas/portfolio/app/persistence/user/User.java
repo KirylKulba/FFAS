@@ -1,5 +1,6 @@
 package ffas.portfolio.app.persistence.user;
 
+import ffas.portfolio.app.persistence.Investment.Investment;
 import ffas.portfolio.app.persistence.common.AbstractEntity;
 import ffas.portfolio.app.persistence.finance.FinancialData;
 import ffas.portfolio.app.persistence.loan.Loan;
@@ -58,6 +59,14 @@ public class User extends AbstractEntity {
             fetch = FetchType.EAGER
     )
     private Set<Loan> loans = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
+    private Set<Investment> investments = new HashSet<>();
 
     public enum Sex {
         Male, Female, Other
