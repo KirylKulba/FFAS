@@ -25,7 +25,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldNameConstants
-@Table(name = "\"investment\"")
+@Table(name = "\"investments\"")
 public class Investment extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id")

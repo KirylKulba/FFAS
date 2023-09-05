@@ -18,11 +18,11 @@ public class LoanFacadeImpl implements LoanFacade {
 
     @Override
     public LoanDto save(final CreateLoanForm form) {
-        return null;
+        return loanPort.save(form);
     }
 
     @Override
     public LoanDto update(final UpdateLoanForm form) {
-        return null;
+        return loanPort.update(form);
     }
 }
